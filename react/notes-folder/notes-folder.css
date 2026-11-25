@@ -1,0 +1,59 @@
+/* Notes folder tile — Day 2/30. Converted from day-02-notes-folder.html.
+   Original page background #f3f3e9 was on <body>; the component root is .bezel. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=block');
+
+.bezel, .bezel * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Outer bezel: solid black, larger radius than the card */
+.bezel {
+  width: 1040px;
+  padding: 16px;
+  background: #000000;
+  border-radius: 56px;
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Card: photo behind, dark folder body on top */
+.card {
+  position: relative;
+  width: 1008px; height: 588px;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #ab180e;
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.photo, .body { position: absolute; left: 0; top: 0; width: 1008px; height: 588px; display: block; }
+
+.label, .title, .counts { position: absolute; }
+
+/* Top-right image label, sitting on the photo */
+.label {
+  top: 28px; right: 30px;
+  font-size: 20px; font-weight: 600; line-height: 1;
+  color: #ffffff;
+}
+
+/* Top-left title block inside the folder tab */
+.title { left: 30px; top: 128px; }
+.title h2 {
+  font-size: 34px; font-weight: 600; line-height: 1.15;
+  letter-spacing: -0.005em; color: #ffffff;
+}
+.title p {
+  margin-top: 4px;
+  font-size: 34px; font-weight: 400; line-height: 1.15;
+  letter-spacing: -0.005em; color: #afafaf;
+}
+
+/* Bottom counts */
+.counts { bottom: 30px; line-height: 1; display: flex; align-items: baseline; gap: 10px; }
+.counts.hero { left: 30px; }
+.counts.side { right: 30px; }
+.num-hero {
+  font-size: 72px; font-weight: 600; letter-spacing: -0.02em;
+}
+.unit, .num-side { font-size: 34px; font-weight: 600; letter-spacing: 0; }

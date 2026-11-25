@@ -1,0 +1,82 @@
+/* Pricing toggle — Day 3/30. Converted from day-03-pricing-toggle.html.
+   Original page background #f5f5f2 was on <body>; the component root is .card. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.card, .card * { margin: 0; padding: 0; box-sizing: border-box; }
+.card {
+  width: 600px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 40px 44px 36px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.08);
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+/* Toggle */
+.toggle-wrap { display: flex; justify-content: center; position: relative; margin-bottom: 34px; }
+.toggle {
+  position: relative;
+  width: 360px; height: 56px;
+  background: #e8e8e4;
+  border-radius: 999px;
+  display: flex;
+}
+.thumb {
+  position: absolute; top: 5px; right: 5px;
+  width: 175px; height: 46px;
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.toggle span {
+  position: relative; z-index: 1;
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 500; color: #6b6b66;
+}
+.toggle span.active { font-weight: 600; color: #111111; }
+.save-badge {
+  position: absolute; top: -11px; right: 6px; z-index: 2;
+  background: #111111; color: #ffffff;
+  font-size: 13px; font-weight: 600;
+  padding: 6px 12px; border-radius: 999px;
+  letter-spacing: 0.01em;
+}
+/* Price */
+.eyebrow {
+  text-align: center;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  color: #8a8a84; margin-bottom: 10px;
+}
+.price-row {
+  display: flex; align-items: baseline; justify-content: center; gap: 10px;
+}
+.price { font-size: 72px; font-weight: 700; letter-spacing: -0.03em; color: #111111; line-height: 1; }
+.per { font-size: 20px; font-weight: 500; color: #8a8a84; }
+.strike { font-size: 20px; font-weight: 500; color: #b0b0aa; text-decoration: line-through; }
+.bill-note { text-align: center; font-size: 15px; color: #8a8a84; margin-top: 10px; }
+/* Divider */
+.divider { height: 1px; background: #e5e5e0; margin: 28px 0; }
+/* Features */
+.features { list-style: none; }
+.features li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 16px; font-weight: 400; color: #1a1a18; line-height: 1.5;
+  margin-bottom: 18px;
+}
+.features li:last-child { margin-bottom: 0; }
+.check {
+  flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%;
+  background: #16a34a; color: #ffffff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; line-height: 1;
+}
+/* CTA */
+.cta {
+  margin-top: 30px;
+  width: 100%; height: 56px;
+  background: #111111; color: #ffffff;
+  border: none; border-radius: 14px;
+  font-family: inherit; font-size: 17px; font-weight: 600;
+  cursor: pointer;
+}
+.reassure { text-align: center; font-size: 13px; color: #9a9a94; margin-top: 14px; }

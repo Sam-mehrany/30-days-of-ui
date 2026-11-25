@@ -1,0 +1,22 @@
+/* Waste to Worth footer — Day 5/30. Converted from day-05-footer-waste-to-worth.html.
+   The background photo was an embedded base64 image; it is now ./bg.webp. */
+.stage, .stage * { box-sizing: border-box; margin: 0; padding: 0; }
+.stage {
+  position: relative; width: 1200px; height: 675px; overflow: hidden; flex: none; background: #0A0A0C; color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.bg { position: absolute; inset: 0; width: 1200px; height: 675px; display: block; object-fit: cover; object-position: 50% 50%; }
+.mark { position: absolute; left: 64px; top: 56px; font-size: 15px; font-weight: 700; letter-spacing: .28em; }
+.hero { position: absolute; left: 0; right: 0; top: 128px; text-align: center; }
+.num { display: inline-flex; align-items: baseline; gap: 22px; line-height: 1; }
+.num b { font-size: 200px; font-weight: 800; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+.num span { font-size: 72px; font-weight: 600; letter-spacing: -.02em; }
+.sub { margin-top: 22px; font-size: 26px; color: #8d8d94; letter-spacing: -.005em; }
+.cta { display: inline-block; margin-top: 42px; padding: 16px 34px; border-radius: 999px; background: #d01f1f; color: #fff;
+  font-size: 16px; font-weight: 600; text-decoration: none; letter-spacing: .01em; border: 0; cursor: pointer; font-family: inherit; }
+.cta:hover { background: #e32b2b; }
+.links { position: absolute; left: 0; right: 0; bottom: 30px; display: flex; justify-content: center; gap: 10px; font-size: 13px; color: #9a9aa2; }
+.links a { color: #a6a6ae; text-decoration: none; }
+.links a:hover { color: #fff; }
+.links i { font-style: normal; color: #6a5a5c; }

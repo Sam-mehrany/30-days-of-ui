@@ -1,0 +1,28 @@
+/* Motia profile card — Day 4/30. Converted from day-04-motia-profile-card.html.
+   Original page background #060918 and the 1200x675 stage were on
+   <html>/<body>; the component root is .card. */
+.card, .card * { box-sizing: border-box; margin: 0; padding: 0; }
+.card {
+  position: relative; width: 440px; height: 380px; border-radius: 26px; background: #FFFFFF; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 8px 24px rgba(0,0,0,.4);
+  font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.banner { position: absolute; left: 0; top: 0; right: 0; height: 156px; background: #0A112D;
+  background: radial-gradient(ellipse 70% 90% at 50% 42%, #2B5BD9 0%, #16296B 38%, #091233 72%, #060918 100%); }
+.wordmark { position: absolute; left: 0; right: 0; top: 56px; text-align: center; color: #FFFFFF;
+  font-size: 30px; font-weight: 200; letter-spacing: .5px; line-height: 1; }
+.row { position: absolute; right: 24px; bottom: 16px; display: flex; align-items: center; gap: 14px; }
+.row svg { width: 16px; height: 16px; fill: #FFFFFF; opacity: .6; display: block; }
+.follow { border: 0; background: #FFFFFF; color: #000; font: 600 13px/1 inherit; font-family: inherit;
+  padding: 9px 18px; border-radius: 999px; cursor: pointer; }
+.tile { position: absolute; left: 24px; top: 120px; width: 72px; height: 72px; border-radius: 16px; background: #1F5BFF;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  font-size: 44px; font-weight: 600; line-height: 1; padding-bottom: 6px; box-shadow: 0 8px 20px rgba(31,91,255,.35); }
+.bio { position: absolute; left: 24px; right: 24px; top: 212px; }
+.name { font-size: 22px; font-weight: 700; color: #000; line-height: 1.2; }
+.handle { font-size: 14px; color: #6B7280; margin-top: 2px; }
+.line { font-size: 14px; color: #000; margin-top: 14px; }
+.link { font-size: 14px; color: #2B6CB0; margin-top: 8px; }
+.stats { margin-top: 20px; font-size: 13px; font-weight: 600; color: #000; }
+.stats span { color: #6B7280; font-weight: 400; }

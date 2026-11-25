@@ -1,0 +1,30 @@
+/* RACKLINE footer — Day 7/30. Converted from day-07-footer-rackline-warehouse.html.
+   The warehouse photo was an embedded base64 image; it is now ./warehouse.webp.
+   Original page background #1a1410 was on <body>; the component root is .stage.
+   The original's bare element selectors (h4, ul, a, li a) are scoped to .card
+   so the styles cannot leak into a host app; visuals inside the card are unchanged. */
+.stage, .stage * { box-sizing: border-box; margin: 0; padding: 0; }
+.stage {
+  position: relative; width: 1200px; height: 675px; overflow: hidden;
+  font-family: -apple-system, "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+}
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.card { position: absolute; top: 88px; left: 64px; right: 64px; height: 300px; background: #fff; border-radius: 24px; box-shadow: 0 40px 90px rgba(60,30,5,.45), 0 12px 28px rgba(60,30,5,.20); padding: 36px 44px 0; color: #16130f; }
+.top { display: flex; justify-content: space-between; height: 178px; }
+.brand { display: flex; flex-direction: column; gap: 10px; }
+.logo { display: flex; align-items: center; gap: 12px; }
+.mark { width: 42px; height: 42px; border-radius: 10px; background: #E8590C; color: #fff; font-weight: 800; font-size: 24px; display: flex; align-items: center; justify-content: center; }
+.word { font-size: 25px; font-weight: 800; letter-spacing: .14em; color: #16130f; }
+.tag { font-size: 13px; color: #6b6760; }
+.cols { display: flex; gap: 56px; }
+.card h4 { font-size: 15px; font-weight: 600; color: #16130f; margin-bottom: 14px; }
+.card ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.card a { text-decoration: none; }
+.card li a { font-size: 13px; color: #6b6760; transition: color .15s; }
+.card li a:hover { color: #E8590C; }
+.rule { height: 1px; background: #e6e2dc; }
+.bot { display: flex; justify-content: space-between; align-items: center; height: 84px; }
+.copy { font-size: 12.5px; color: #6b6760; }
+.socs { display: flex; gap: 10px; }
+.soc { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #16130f; color: #16130f; display: flex; align-items: center; justify-content: center; transition: color .15s, border-color .15s; }
+.soc:hover { color: #E8590C; border-color: #E8590C; }
