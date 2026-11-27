@@ -1,0 +1,52 @@
+<section
+  class="ember"
+  aria-roledescription="carousel"
+  aria-label="Welcome"
+  [attr.data-last]="isLast ? '' : null"
+  (pointerdown)="onPointerDown($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointermove)="onPointerMove($event)"
+>
+  <header class="ember__top">
+    <div class="ember__logo"><i></i>Ember</div>
+    <button class="ember__skip" type="button" (click)="go(last)">Skip</button>
+  </header>
+
+  <div class="ember__track" [style.transform]="'translateX(' + (-100 * current) + '%)'">
+    <article
+      *ngFor="let s of slides; let n = index"
+      class="slide"
+      aria-roledescription="slide"
+      [attr.aria-label]="(n + 1) + ' of ' + slides.length"
+      [attr.aria-hidden]="n !== current"
+    >
+      <div class="hero">
+        <span *ngFor="let c of s.shards" [class]="'shard ' + c"></span>
+        <div class="card" [class.card--solid]="s.solid" [style.--tiltX]="s.tilt.x" [style.--tiltY]="s.tilt.y">
+          <div class="card__row"><span class="card__chip"></span><span class="card__brand">EMBER</span></div>
+          <div>
+            <div class="card__label">{{ s.label }}</div>
+            <div class="card__num">{{ s.num }}<small *ngIf="s.small">{{ s.small }}</small></div>
+          </div>
+          <div class="card__pan">{{ s.pan }}</div>
+        </div>
+      </div>
+      <div class="copy"><h2>{{ s.title }}</h2><p>{{ s.body }}</p></div>
+    </article>
+  </div>
+
+  <footer class="ember__foot">
+    <div class="dots" role="tablist" aria-label="Choose slide">
+      <button
+        *ngFor="let s of slides; let n = index"
+        class="dot"
+        type="button"
+        role="tab"
+        [attr.aria-label]="'Slide ' + (n + 1)"
+        [attr.aria-current]="n === current"
+        (click)="go(n)"
+      ></button>
+    </div>
+    <button class="cta" type="button">Get started</button>
+  </footer>
+</section>

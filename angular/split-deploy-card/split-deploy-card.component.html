@@ -1,0 +1,57 @@
+<section class="deploy" aria-labelledby="dh">
+  <header class="deploy__head">
+    <h2 id="dh"><span>Every push gets a preview.</span> Promote it to production when it looks right.</h2>
+    <div class="seg" role="tablist" aria-label="Environment view" (keydown)="onKeydown($event)">
+      <span #thumb class="seg__thumb" aria-hidden="true"></span>
+      @for (t of tabs; track t.id) {
+        <button #tab role="tab" [attr.aria-selected]="active === t.id ? 'true' : 'false'" (click)="select(t.id)">{{ t.label }}</button>
+      }
+    </div>
+  </header>
+
+  <div class="tray">
+    <div class="panes">
+      <article class="card card--light">
+        <div class="card__top">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 3v12M18 9a3 3 0 1 0 0-.01M6 21a3 3 0 1 0 0-.01M18 12a9 9 0 0 1-9 9"/></svg></span>
+          <span class="pill">Preview</span>
+        </div>
+        <h3>{{ view.lt }}</h3>
+        <p>{{ view.lp }}</p>
+        <div class="meta">
+          @for (row of view.l; track row[0]) {
+            <div><span>{{ row[0] }}</span><b>{{ row[1] }}</b></div>
+          }
+        </div>
+      </article>
+
+      <article class="card card--dark">
+        <div class="card__top">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"/></svg></span>
+          <span class="pill" [class.pill--ok]="!restarting" [class.pill--busy]="restarting"><i></i>{{ restarting ? 'Restarting' : 'Deployed' }}</span>
+        </div>
+        <h3>{{ view.dt }}</h3>
+        <p>{{ view.dp }}</p>
+        @if (isLog) {
+          <pre class="log">@for (line of logLines; track $index) {<ng-container>{{ $first ? '' : nl }}<span class="ok">{{ line[0] }}</span>{{ line[1] }}</ng-container>}</pre>
+        } @else {
+          <div class="meta">
+            <div><span>Commit</span><b>3f2a9c1</b></div>
+            <div><span>Uptime, 30 days</span><b>99.99%</b></div>
+            <div><span>p95 response</span><b>84 ms</b></div>
+          </div>
+        }
+      </article>
+    </div>
+
+    <div class="strip">
+      <span class="pill">main</span>
+      <span class="pill">Node 22</span>
+      <span class="pill">{{ ago }}</span>
+      <span class="spacer"></span>
+      <button class="chip" type="button" [disabled]="restarting" (click)="restart()">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>Restart
+      </button>
+    </div>
+  </div>
+</section>

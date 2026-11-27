@@ -1,0 +1,49 @@
+<footer #root class="halcyon">
+  <div class="art" aria-hidden="true">
+    <canvas #stars class="stars"></canvas>
+    <div class="painting"></div>
+    <div class="glow"></div>
+    <div class="flock">
+      @for (style of birds; track $index) {
+        <div class="bird" [attr.style]="style"><img class="f a" alt="" src="./kf-a.webp"><img class="f b" alt="" src="./kf-b.webp"></div>
+      }
+    </div>
+    <div class="grain"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"><h2>Halcyon</h2><span class="tag">No. 07 · Winter Tide</span></div>
+      <p>A field journal of the sea, written by lantern light and printed slowly, twice a year.</p>
+      <div class="social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm4.9-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 3.6c2.7 0 3 0 4.1.1 1 0 1.6.2 1.9.4.5.2.8.4 1.2.8.4.4.6.7.8 1.2.1.3.3.9.4 1.9v8.2c-.1 1-.3 1.6-.4 1.9-.2.5-.4.8-.8 1.2-.4.4-.7.6-1.2.8-.3.1-.9.3-1.9.4H7.9c-1 0-1.6-.3-1.9-.4a3 3 0 0 1-1.2-.8 3 3 0 0 1-.8-1.2c-.1-.3-.3-.9-.4-1.9V7.9c.1-1 .3-1.6.4-1.9.2-.5.4-.8.8-1.2.4-.4.7-.6 1.2-.8.3-.1.9-.3 1.9-.4H12Zm0-1.8c-2.8 0-3.1 0-4.2.1-1.1 0-1.8.2-2.5.5-.7.3-1.2.6-1.8 1.2-.6.6-1 1.1-1.2 1.8-.3.7-.4 1.4-.5 2.5v8.4c.1 1.1.2 1.8.5 2.5.3.7.6 1.2 1.2 1.8.6.6 1.1.9 1.8 1.2.7.3 1.4.4 2.5.5h8.4c1.1-.1 1.8-.2 2.5-.5a5 5 0 0 0 3-3c.3-.7.4-1.4.5-2.5V7.8c-.1-1.1-.2-1.8-.5-2.5-.3-.7-.6-1.2-1.2-1.8-.6-.6-1.1-.9-1.8-1.2-.7-.3-1.4-.4-2.5-.5H12Z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.8 2.5h3.3l-7.2 8.2 8.5 11.3h-6.6l-5.2-6.8-6 6.8H1.3l7.7-8.8L.9 2.5h6.8l4.7 6.2 5.4-6.2Zm-1.2 17.5h1.8L6.6 4.4H4.6l12 15.6Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8ZM9.7 15V9l5.8 3-5.8 3Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.75H3V9.75Zm6.5 0h3.8v1.6h.06c.53-1 1.84-2.06 3.78-2.06 4.04 0 4.79 2.66 4.79 6.12v6.09h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.86v5.49h-4V9.75Z"/></svg></a>
+      </div>
+    </div>
+
+    <nav aria-label="Journal">
+      <h3>Journal</h3>
+      <ul><li><a href="#">Current Tide</a></li><li><a href="#">Logbook</a></li><li><a href="#">Correspondents</a></li><li><a href="#">Harbours</a></li></ul>
+    </nav>
+    <nav aria-label="House">
+      <h3>House</h3>
+      <ul><li><a href="#">About</a></li><li><a href="#">Submissions</a></li><li><a href="#">Contact</a></li><li><a href="#">Press</a></li></ul>
+    </nav>
+
+    <div class="letters">
+      <h3>Dispatches</h3>
+      <p class="lede">One letter at every spring tide.</p>
+      <form [class.sent]="sent" (submit)="onSubmit($event)">
+        <label class="field">
+          <input type="email" required placeholder="Your email address" aria-label="Email address">
+          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </label>
+        <p class="thanks">Signed for. Watch the horizon.</p>
+      </form>
+      <div class="tide"><canvas #moon width="28" height="28"></canvas><span>{{ tide }}</span></div>
+      <p class="legal">© {{ year }} Halcyon. Printed by the sea in Halifax.</p>
+    </div>
+  </div>
+</footer>

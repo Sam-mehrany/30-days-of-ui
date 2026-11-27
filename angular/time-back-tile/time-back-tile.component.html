@@ -1,0 +1,65 @@
+<div class="bp">
+  <div class="bp__lines" aria-hidden="true">
+    <i class="h" style="top:0"></i><i class="h" style="bottom:0"></i>
+    <i class="v" style="left:0"></i><i class="v" style="right:0"></i>
+    <i class="v" style="left:50%;top:0;bottom:auto;height:68px"></i><i class="v" style="left:50%;bottom:0;top:auto;height:68px"></i>
+    <span class="n" style="left:0;top:0"></span><span class="n" style="left:100%;top:0"></span>
+    <span class="n" style="left:0;top:100%"></span><span class="n" style="left:100%;top:100%"></span>
+  </div>
+
+  <section class="tile" aria-labelledby="tb">
+    <div class="kicker" id="tb">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M10 2h4M12 14l3-3"/></svg>Get time back
+    </div>
+    <p class="lead"><b>Skip the meetings that don't need you.</b> Your notetaker joins, listens, and hands you the five minutes that mattered.</p>
+
+    <div class="stage">
+      <article class="notes" aria-label="Meeting notes">
+        <h3>Weekly Roadmap notes</h3>
+        <div class="who"><span class="av"></span><b>Maya</b> Last updated 4 min ago</div>
+
+        <div class="player">
+          <button class="play" type="button" [attr.aria-label]="playing() ? 'Pause recording' : 'Play recording'" (click)="toggle()">
+            <svg viewBox="0 0 24 24">
+              @if (playing()) {
+                <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+              } @else {
+                <path d="M7 4v16l13-8z"/>
+              }
+            </svg>
+          </button>
+          <div #wave class="wave" aria-hidden="true" (click)="scrub($event)">
+            @for (h of bars; track $index) {
+              <i [class.on]="$index < on()" [style.height.%]="h"></i>
+            }
+          </div>
+          <span class="time" aria-live="off">{{ time() }}</span>
+        </div>
+
+        <div class="sum">
+          <h4>Summary</h4>
+          <p>The team moved the billing launch to week two and agreed to cut the export feature from this cycle.</p>
+          <div class="sk" style="width:86%"></div><div class="sk" style="width:62%"></div>
+        </div>
+      </article>
+
+      <div class="clock" aria-hidden="true" [style.--saved]="deg() + 'deg'">
+        <div class="face">
+          <div class="wedge"></div>
+          <div class="ticks">
+            @for (k of ticks; track k) {
+              <i [class.m]="k % 5 !== 0" [style.transform]="'translateX(-50%) rotate(' + k * 6 + 'deg)'"></i>
+            }
+          </div>
+          <div class="hand" [style.--a]="deg() - 90 + 'deg'"></div>
+          <div class="hub"></div>
+          <div class="clock__label">{{ mins() }} min saved</div>
+          <div class="glare"></div>
+          @for (d of dust; track $index) {
+            <span class="dust" [style.left]="d.left" [style.top]="d.top" [style.animation-delay]="d.delay"></span>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

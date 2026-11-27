@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Split Pane Deploy Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ============ Tokens (neutral ladder from the read; contrast fixes noted) ============ */
+:root{
+  --page:#eaeaea; --tray:#ffffff; --soft:#f1f1f1; --seg:#f3f3f3;
+  --dark-top:#2e2e2e; --dark-bot:#0e0e0e;
+  --ink:#0a0a0a;
+  --lead:#767676;        /* heading lead-in: was #b8b8b8 (1.98:1 FAIL) -> 4.54:1 AA, still reads two-tone */
+  --body:#656565;        /* 5.16:1 on #f1f1f1, kept */
+  --tag:#5e5e5e;         /* tag text: was #999999 (2.52:1 FAIL) -> 5.74:1 */
+  --on-dark:#f4f4f4; --on-dark-2:#a8a8a8;  /* 7.01:1 on dark card */
+  --ok-text:#e6f7cd; --ok-dot:#7ed957;
+  --line:rgba(0,0,0,.08);
+
+  /* tight scale: heading 1.1x title, title 1.5x body */
+  --fs-body:13px; --fs-title:19.5px; --fs-head:21.5px;
+  /* nested radii: tray > card > pill */
+  --r-tray:28px; --pad:8px; --r-card:calc(var(--r-tray) - var(--pad)); --r-pill:999px;
+  --font:Inter, "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:var(--page);display:grid;place-items:center;padding:40px 20px;font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+.deploy{width:min(860px,100%)}
+.deploy__head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px;flex-wrap:wrap}
+.deploy__head h2{font:400 var(--fs-head)/1.3 var(--font);letter-spacing:-.015em;max-width:30ch}
+.deploy__head h2 span{color:var(--lead)}
+
+/* segmented control */
+.seg{position:relative;display:flex;background:var(--seg);border:1px solid var(--line);border-radius:var(--r-pill);padding:3px}
+.seg__thumb{position:absolute;top:3px;bottom:3px;left:0;border-radius:var(--r-pill);background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04);transition:transform .45s var(--ease),width .45s var(--ease)}
+.seg button{position:relative;z-index:1;border:0;background:none;cursor:pointer;padding:8px 16px;border-radius:var(--r-pill);
+  font:500 13px/1 var(--font);color:var(--body);transition:color .25s}
+.seg button[aria-selected="true"]{color:var(--ink)}
+.seg button:focus-visible,.chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* tray */
+.tray{background:var(--tray);border-radius:var(--r-tray);padding:var(--pad);
+  box-shadow:0 0 0 1px var(--line),0 20px 40px -24px rgba(0,0,0,.18)}
+.panes{display:grid;grid-template-columns:1fr 1fr;gap:var(--pad)}
+.card{border-radius:var(--r-card);padding:22px;min-height:300px;display:flex;flex-direction:column;gap:14px;transition:opacity .3s}
+.card--light{background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)}
+.card--dark{background:linear-gradient(180deg,var(--dark-top),var(--dark-bot));color:var(--on-dark);
+  box-shadow:0 12px 28px -12px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08)}
+.card__top{display:flex;justify-content:space-between;align-items:center}
+.card h3{font:400 var(--fs-title)/1.25 var(--font);letter-spacing:-.01em}
+.card p{font:400 var(--fs-body)/1.55 var(--font);color:var(--body)}
+.card--dark p{color:var(--on-dark-2)}
+.icon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.card--dark .icon{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.icon svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+.meta{margin-top:auto;display:grid;gap:8px}
+.meta div{display:flex;justify-content:space-between;font:400 12px/1 var(--font);color:var(--body);padding-top:8px;border-top:1px solid var(--line)}
+.meta b{font-weight:500;color:var(--ink)}
+.card--dark .meta div{color:var(--on-dark-2);border-color:rgba(255,255,255,.08)}
+.card--dark .meta b{color:var(--on-dark)}
+
+.log{margin-top:auto;font:400 11.5px/1.7 var(--mono);color:var(--on-dark-2);background:rgba(0,0,0,.28);border-radius:calc(var(--r-card) - 10px);padding:12px 14px;min-height:96px}
+.log .ok{color:var(--ok-text)}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-pill);font:500 11.5px/1 var(--font);
+  background:#fff;color:var(--tag);box-shadow:inset 0 0 0 1px var(--line)}
+.pill--ok{background:rgba(126,217,87,.12);color:var(--ok-text);box-shadow:inset 0 0 0 1px rgba(126,217,87,.25)}
+.pill--ok i{width:6px;height:6px;border-radius:50%;background:var(--ok-dot);box-shadow:0 0 0 3px rgba(126,217,87,.18);animation:pulse 2.4s ease-in-out infinite}
+.pill--busy{background:rgba(255,255,255,.08);color:var(--on-dark);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.pill--busy i{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;border-right-color:transparent;animation:spin .8s linear infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px rgba(126,217,87,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* footer strip */
+.strip{margin-top:var(--pad);background:var(--soft);border-radius:var(--r-card);padding:10px 10px 10px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.strip .spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px;border-radius:var(--r-pill);border:1px solid rgba(0,0,0,.12);
+  background:transparent;cursor:pointer;font:500 12.5px/1 var(--font);color:var(--ink);transition:background .2s,border-color .2s}
+.chip:hover{background:#fff;border-color:rgba(0,0,0,.18)}
+.chip svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;transition:transform .6s var(--ease)}
+.chip:hover svg{transform:rotate(-180deg)}
+.chip[disabled]{opacity:.5;cursor:default}
+
+@media (max-width:680px){.panes{grid-template-columns:1fr}.deploy__head{align-items:flex-start}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="deploy" aria-labelledby="dh">
+  <header class="deploy__head">
+    <h2 id="dh"><span>Every push gets a preview.</span> Promote it to production when it looks right.</h2>
+    <div class="seg" role="tablist" aria-label="Environment view">
+      <span class="seg__thumb" aria-hidden="true"></span>
+      <button role="tab" aria-selected="true" data-view="overview">Overview</button>
+      <button role="tab" aria-selected="false" data-view="builds">Builds</button>
+      <button role="tab" aria-selected="false" data-view="logs">Logs</button>
+    </div>
+  </header>
+
+  <div class="tray">
+    <div class="panes">
+      <article class="card card--light">
+        <div class="card__top">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 3v12M18 9a3 3 0 1 0 0-.01M6 21a3 3 0 1 0 0-.01M18 12a9 9 0 0 1-9 9"/></svg></span>
+          <span class="pill">Preview</span>
+        </div>
+        <h3 data-f="lt">feat/checkout-redesign</h3>
+        <p data-f="lp">Built from your branch with its own URL, so reviewers can click through before anything merges.</p>
+        <div class="meta">
+          <div><span data-f="l1k">Commit</span><b data-f="l1v">a91c4e2</b></div>
+          <div><span data-f="l2k">Build time</span><b data-f="l2v">38s</b></div>
+          <div><span data-f="l3k">Reviewers</span><b data-f="l3v">2 approved</b></div>
+        </div>
+      </article>
+
+      <article class="card card--dark">
+        <div class="card__top">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"/></svg></span>
+          <span class="pill pill--ok" id="status"><i></i>Deployed</span>
+        </div>
+        <h3 data-f="dt">Production</h3>
+        <p data-f="dp">Live on halcyon.studio across 18 edge regions, with instant rollback to any earlier build.</p>
+        <div class="meta" data-panel="meta">
+          <div><span>Commit</span><b id="prodCommit">3f2a9c1</b></div>
+          <div><span>Uptime, 30 days</span><b>99.99%</b></div>
+          <div><span>p95 response</span><b>84 ms</b></div>
+        </div>
+        <pre class="log" data-panel="log" hidden></pre>
+      </article>
+    </div>
+
+    <div class="strip">
+      <span class="pill">main</span>
+      <span class="pill">Node 22</span>
+      <span class="pill" id="ago">Updated 2m ago</span>
+      <span class="spacer"></span>
+      <button class="chip" id="restart" type="button"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>Restart</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const seg = document.querySelector('.seg'), thumb = seg.querySelector('.seg__thumb');
+  const tabs = [...seg.querySelectorAll('button')];
+  const $ = s => document.querySelector(s), f = k => document.querySelector(`[data-f="${k}"]`);
+  const views = {
+    overview:{lt:'feat/checkout-redesign',lp:'Built from your branch with its own URL, so reviewers can click through before anything merges.',l:[['Commit','a91c4e2'],['Build time','38s'],['Reviewers','2 approved']],dt:'Production',dp:'Live on halcyon.studio across 18 edge regions, with instant rollback to any earlier build.'},
+    builds:{lt:'Last 24 hours',lp:'Fourteen builds, one failed on a type error and was fixed in the next push.',l:[['Succeeded','13'],['Median time','41s'],['Cache hit','92%']],dt:'Production build',dp:'Promoted from preview a91c4e1 after review. Previous build kept warm for rollback.'},
+    logs:{lt:'Runtime logs',lp:'Streaming from every region. Filter by route, status or request ID.',l:[['Requests / min','2,310'],['Errors','0.02%'],['Cold starts','3']],dt:'Live tail',dp:'The last few lines from production, newest at the bottom.'}
+  };
+  const logLines = ['<span class="ok">200</span> GET /            12ms  yul1','<span class="ok">200</span> GET /journal     31ms  iad1','<span class="ok">200</span> POST /api/sub    84ms  yyz1','<span class="ok">304</span> GET /og.png       4ms  cdg1'];
+
+  function moveThumb(b){ thumb.style.width = b.offsetWidth + 'px'; thumb.style.transform = `translateX(${b.offsetLeft}px)`; }
+  function select(b){
+    tabs.forEach(t => t.setAttribute('aria-selected', t === b)); moveThumb(b);
+    const v = views[b.dataset.view];
+    f('lt').textContent = v.lt; f('lp').textContent = v.lp; f('dt').textContent = v.dt; f('dp').textContent = v.dp;
+    v.l.forEach((p,i) => { f(`l${i+1}k`).textContent = p[0]; f(`l${i+1}v`).textContent = p[1]; });
+    const isLog = b.dataset.view === 'logs';
+    $('[data-panel="meta"]').hidden = isLog; $('[data-panel="log"]').hidden = !isLog;
+    if (isLog) $('[data-panel="log"]').innerHTML = logLines.join('\n');
+  }
+  tabs.forEach(b => b.addEventListener('click', () => select(b)));
+  seg.addEventListener('keydown', e => {
+    const i = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ const n = tabs[(i + (e.key==='ArrowRight'?1:-1) + tabs.length) % tabs.length]; n.focus(); select(n); }
+  });
+  addEventListener('resize', () => moveThumb(tabs.find(t => t.getAttribute('aria-selected') === 'true')));
+  requestAnimationFrame(() => moveThumb(tabs[0]));
+
+  $('#restart').addEventListener('click', e => {
+    const btn = e.currentTarget, st = $('#status');
+    btn.disabled = true; st.className = 'pill pill--busy'; st.innerHTML = '<i></i>Restarting';
+    setTimeout(() => {
+      st.className = 'pill pill--ok'; st.innerHTML = '<i></i>Deployed';
+      $('#ago').textContent = 'Updated just now'; btn.disabled = false;
+    }, 2200);
+  });
+})();
+</script>
+</body>
+</html>

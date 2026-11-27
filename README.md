@@ -2,7 +2,7 @@
 
 One UI element a day, designed and built in code — free to use in your own projects.
 
-![30 Days of UI](https://img.shields.io/badge/30%20Days%20of%20UI-Day%208%2F30-blue)
+![30 Days of UI](https://img.shields.io/badge/30%20Days%20of%20UI-Day%2012%2F30-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 ![No build step](https://img.shields.io/badge/Build-None%20needed-lightgrey)
 
@@ -23,8 +23,12 @@ Every day ships as **one self-contained HTML file**. No framework, no build step
 | 06 | Footer: HONK! Dunes | A footer that lets the landscape do the talking: generated orange dunes, winding road and truck, white HONK! card masked behind the dunes so they rise over its bottom corners. | [day-06-footer-honk-dunes.html](day-06-footer-honk-dunes.html) | [Instagram](https://www.instagram.com/p/DgK4s0xCfRT/) · [Threads](https://www.threads.com/@ui.by.sam/post/DgK4yCbiVEm) · [LinkedIn](https://www.linkedin.com/posts/sam-mehrany_day-630-footer-honk-dunes-a-footer-share-7531384878978711552-uaso/) |
 | 07 | Footer: RACKLINE Shelving | A warehouse-shelving manufacturer footer: generated warehouse interior with orange racking aisles and a yellow forklift, white floating card with Products / Company / Support columns. | [day-07-footer-rackline-warehouse.html](day-07-footer-rackline-warehouse.html) | Not posted yet |
 | 08 | Social profile card: SIVRA | A brand-identity profile card: blue halftone 3D banner with stacked SIVRA / BUSINESS / SOLUTION type, blue logo circle overlapping the seam, name with verified badge, black Follow pill. | [day-08-profile-card-sivra.html](day-08-profile-card-sivra.html) | Not posted yet |
+| 09 | Footer: Halcyon | A sea-journal footer: a baroque sea-nymph painting masked into black, kingfishers flying across a twinkling sky, a lantern that flickers and a live moon-phase chip counting to the next spring tide. | [day-09-footer-halcyon.html](day-09-footer-halcyon.html) | Not posted yet |
+| 10 | Onboarding: Ember | A three-slide fintech onboarding carousel: frosted-glass orange card over blurred 3D shards, swipe, arrow keys, dots, auto-advance and a Get started CTA. | [day-10-ember-onboarding.html](day-10-ember-onboarding.html) | Not posted yet |
+| 11 | Split-pane deploy card | A neutral split pane: light Preview card beside a dark Production card, sliding segmented control (Overview / Builds / Logs), live log tail and a Restart chip. | [day-11-split-deploy-card.html](day-11-split-deploy-card.html) | Not posted yet |
+| 12 | Get time back tile | A blueprint-grid feature tile with a pure-CSS glass stopwatch: hit play on the meeting recording and the violet wedge sweeps round, counting minutes saved. | [day-12-time-back-tile.html](day-12-time-back-tile.html) | Not posted yet |
 
-New days land here every morning, in order. Days 1–8 are in; Day 9 is next.
+New days land here every morning, in order. Days 1–12 are in; Day 13 is next.
 
 ## How to use it
 
